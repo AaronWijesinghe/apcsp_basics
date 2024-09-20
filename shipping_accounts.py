@@ -23,7 +23,7 @@ if username in users:
 
         # Depending on the amount of orders, set the correct cost per item
         if items == 0:
-            input("You must ship more than 0 items. ")
+            input("You must order more than 0 items. ")
             raise SystemExit
         elif items < 100:
             cost = 5.10
@@ -44,7 +44,7 @@ if username in users:
         else:
             input("Your order has been canceled. ")
     else:
-        input("Invalid amount of orders. ")
+        input("Invalid amount of items. ")
 else:
     # If the username is invalid, display the goodbye message
     input("Sorry, you don't have an account with us. ")
