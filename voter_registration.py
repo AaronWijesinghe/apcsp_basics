@@ -13,7 +13,7 @@ parties = ["republican", "democratic", "independent", "libertarian", "green"]
 
 # If the user's age isn't a number, exit
 if not age.isnumeric():
-    print("\nYou must enter a number for your age.")
+    print("\nYou age must be a number.")
     raise SystemExit
 else:
     age = int(age)
