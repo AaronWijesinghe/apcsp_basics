@@ -1,4 +1,4 @@
-# ANSI codes to be used throughout the program
+# ANSI formatting to be used throughout the program
 bold = "\033[1m"
 underline = "\033[4m"
 end = "\033[0m"
@@ -8,7 +8,7 @@ print("Welcome to the Voter Registration App!")
 
 # Ask for name/age and set list of parties
 name = input("\nPlease enter your name: ").title()
-age = input("Please enter your age: ")
+age = input(f"Please enter your age {bold}(MUST be 18+){end}: ")
 parties = ["republican", "democratic", "independent", "libertarian", "green"]
 
 # If the user's age isn't a number, exit
@@ -44,4 +44,4 @@ if age >= 18:
 
 else:
     # If the user is under 18 years old, exit the program
-    print(f"\nYou are not old enough to vote. {underline}You must be 18+ to vote.{end}")
+    print(f"\nYou are not old enough to vote. {bold}You must be 18+ to vote.{end}")
