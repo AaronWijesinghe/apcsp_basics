@@ -4,7 +4,7 @@ underline = "\033[4m"
 end = "\033[0m"
 
 # Display welcome message
-print("Welcome to the Voter Registration App!")
+print(f"{bold}Welcome to the Voter Registration App!{end}")
 
 # Ask for name/age and set list of parties
 name = input("\nPlease enter your name: ").title()
