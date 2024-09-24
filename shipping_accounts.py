@@ -23,7 +23,7 @@ if username in users:
 
         # Depending on the amount of orders, set the correct cost per item
         if items == 0:
-            input("You must order more than 0 items. ")
+            print("You must order more than 0 items. ")
             raise SystemExit
         elif items < 100:
             cost = 5.10
@@ -40,11 +40,11 @@ if username in users:
 
         # Confirm or cancel the order
         if input("\nWould you like to place this order (y/n)? ").lower().startswith("y"):
-            input(f"Alright, your order of {items} items has been placed! ")
+            print(f"Alright, your order of {items} items has been placed! ")
         else:
-            input("Your order has been canceled. ")
+            print("Your order has been canceled. ")
     else:
-        input("Invalid amount of items. ")
+        print("Invalid amount of items. ")
 else:
     # If the username is invalid, display the goodbye message
-    input("Sorry, you don't have an account with us. ")
+    print("Sorry, you don't have an account with us. ")

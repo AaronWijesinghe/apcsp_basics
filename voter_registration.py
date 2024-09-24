@@ -1,16 +1,43 @@
+import os
+import json
+
 # ANSI formatting to be used throughout the program
 # This makes the output look nicer.
 bold = "\033[1m"
 underline = "\033[4m"
 end = "\033[0m"
 
+# Set predefined list of parties
+parties = ["Republican", "Democratic", "Independent", "Libertarian", "Green"]
+
+# Load previous votes
+if os.path.exists("votes.json"):
+    votes = json.loads("votes.json")
+else:
+    votes = {
+        "Republican": [],
+        "Democratic": [],
+        "Independent": [],
+        "Libertarian": [],
+        "Green": []
+    }
+
 # Display welcome message
 print(f"{bold}Welcome to the Voter Registration App!{end}")
 
-# Ask for name/age and set list of parties
+# Ask for name/age
 name = input("\nPlease enter your name: ").title()
 age = input(f"Please enter your age {bold}(MUST be 18+){end}: ")
-parties = ["republican", "democratic", "independent", "libertarian", "green"]
+
+# If you already voted, exit the program
+vote = {
+    "name": name,
+    "age": age
+}
+for _ in votes:
+    if vote in _:
+        print("\nUser already voted.")
+        raise SystemExit
 
 # If the user's age isn't a number, exit
 if not age.isnumeric():
@@ -24,24 +51,28 @@ if age >= 18:
     print(f"\nCongratulations {name}! You are old enough to register to vote.")
     print(f"\n{underline}Here is a list of political parties to join:{end}")
     for _ in parties:
-        print(f"\t• {_.title()}")
+        print(f"\t• {_}")
 
     # Ask user what party they want to vote for
-    party = input("\nWhat party would you like to join? ").lower()
-    if party in parties:
+    chosen_party = input("\nWhat party would you like to join? ").title().strip()
+    if chosen_party in parties:
         print("")
-        print(f"Congratulations {name}! You have joined the {party.title()} party!")
+        print(f"Congratulations {name}! You have joined the {chosen_party} party!")
     else:
-        print(f"{name}, this party does not exist.")
+        print(f"{name}, this party does not exist. Please see the above parties.")
         raise SystemExit
 
     # Check if the party is major/minor/independent
-    if party in ["republican", "democratic"]:
+    if chosen_party in ["Republican", "Democratic"]:
         print("That is a major party!")
-    elif party in ["libertarian", "green"]:
+    elif chosen_party in ["Libertarian", "Green"]:
         print("That is not a major party.")
-    else:
+    elif chosen_party == "Independent":
         print("You are an independent person!")
+
+    # Save the vote
+    votes[chosen_party].extend(vote)
+    json.dump(votes, "votes.json", 4)
 
 else:
     # If the user is under 18 years old, exit the program
