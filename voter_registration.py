@@ -14,7 +14,7 @@ parties = ["republican", "democratic", "independent", "libertarian", "green"]
 
 # If the user's age isn't a number, exit
 if not age.isnumeric():
-    print("\nYou age must be a number.")
+    print(f"\nInvalid age. {bold}Your age must be a number.{end}")
     raise SystemExit
 else:
     age = int(age)
@@ -46,3 +46,7 @@ if age >= 18:
 else:
     # If the user is under 18 years old, exit the program
     print(f"\nYou are not old enough to vote. {bold}You must be 18+ to vote.{end}")
+    if age == 17:
+        print(f"You can vote in 1 year.")
+    else:
+        print(f"You can vote in {18 - age} years.")
