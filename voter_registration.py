@@ -28,8 +28,8 @@ if age >= 18:
 
     # Ask user what party they want to vote for
     party = input("\nWhat party would you like to join? ").lower()
-    print("")
     if party in parties:
+        print("")
         print(f"Congratulations {name}! You have joined the {party.title()} party!")
     else:
         print(f"{name}, this party does not exist.")
