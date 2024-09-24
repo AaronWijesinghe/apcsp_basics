@@ -1,4 +1,5 @@
 # ANSI formatting to be used throughout the program
+# This makes the output look nicer
 bold = "\033[1m"
 underline = "\033[4m"
 end = "\033[0m"
