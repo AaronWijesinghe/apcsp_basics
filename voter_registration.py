@@ -20,7 +20,7 @@ else:
     age = int(age)
 
 if age >= 18:
-    # If age is over 18, display parties and congratulate user
+    # If age is over 18, display parties and congratulate the user
     print(f"\nCongratulations {name}! You are old enough to register to vote.")
     print(f"\n{underline}Here is a list of political parties to join:{end}")
     for _ in parties:
