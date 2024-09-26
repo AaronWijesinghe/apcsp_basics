@@ -12,7 +12,12 @@ parties = ["Republican", "Democratic", "Independent", "Libertarian", "Green"]
 
 # Load previously saved votes
 if os.path.exists("votes.json"):
-    votes = json.loads(open("votes.json").read())
+    try:
+        votes = json.loads(open("votes.json").read())
+    except:
+        print("An error occured when parsing the votes.")
+        os.remove("votes.json")
+        raise SystemExit
 else:
     votes = {
         "Republican": [],
@@ -28,9 +33,16 @@ print(f"{bold}Welcome to the Voter Registration App!{end}")
 # Ask for name/age
 name = input("\nPlease enter your full name: ").title().strip()
 if len(name.split(" ")) < 2:
-    print("\nEnter your government name.")
+    print(f"You must enter your {bold}full name{end} to vote.")
     raise SystemExit
 age = input(f"Please enter your age {bold}(MUST be 18+){end}: ")
+
+# If the user's age isn't a number, exit
+if not age.isnumeric():
+    print(f"\nInvalid age. {bold}Your age must be a number.{end}")
+    raise SystemExit
+else:
+    age = int(age)
 
 # If the user already voted, exit the program
 vote = {
@@ -41,13 +53,6 @@ for _ in votes:
     if vote in votes[_]:
         print(f"\nYou can't vote again, {name}.\nChosen party: {_}")
         raise SystemExit
-
-# If the user's age isn't a number, exit
-if not age.isnumeric():
-    print(f"\nInvalid age. {bold}Your age must be a number.{end}")
-    raise SystemExit
-else:
-    age = int(age)
 
 if age >= 18:
     # If age is over 18, display parties and congratulate the user
