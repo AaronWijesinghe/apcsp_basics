@@ -1,4 +1,5 @@
-# Make sure that even the longest numbers can be shown (integers only)
+# Make sure that even the longest integers can be shown
+# You heard me right, only integers, not floats >:)
 import sys
 sys.set_int_max_str_digits(0)
 
@@ -34,7 +35,7 @@ def divide(a, b):
         print(f"The quotient of {bold}{a}{end} and {bold}{b}{end} is {bold}{quotient}{end}.")
         return f"{a} / {b} = {quotient}"
     else:
-        print("You cannot divide by zero.")
+        print(f"{bold}You cannot divide by zero.{end}")
         return "DIV ERROR"
 
 def exponent(a, b):
@@ -50,7 +51,7 @@ print("Enter two numbers and an operation and the desired operation will be perf
 history = []
 while True:
     try:
-        # Get numbers from the user
+        # Get numbers from the user and set their types accordingly
         print("")
         num1 = input("Enter a number: ")
         num2 = input("Enter another number: ")
@@ -74,10 +75,10 @@ while True:
         elif operation in ["exponentation", "e"]:
             history += [exponent(num1, num2)]
         else:
-            print("This operation doesn't exist.")
+            print(f"{bold}This operation doesn't exist.{end}")
             history += ["OP ERROR"]
     except OverflowError:
-        print("Result is too large to display.")
+        print(f"{bold}Result is too large to display. This can be solved by not using decimals.{end}")
         history += ["OVERFLOW ERROR"]
     except ValueError:
         print("Invalid numbers. ")
@@ -88,5 +89,5 @@ while True:
         for _ in history:
             print(_)
         if len(history) == 0:
-            print("No calculations saved")
+            print("No calculations saved!")
         raise SystemExit
