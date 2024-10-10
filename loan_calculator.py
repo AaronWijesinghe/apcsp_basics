@@ -8,10 +8,6 @@ def get_loan_info():
     loan["monthly payment"] = abs(float(input("Enter the monthly payment: ")))
     loan["money paid"] = 0
 
-    if loan["monthly payment"] > loan["principal"]:
-        print("\nYou cannot pay more than the value of the loan!")
-        raise SystemExit
-
 def show_loan_info(loan, months):
     # Show the loan status after [months] months
     print(f"\n=====Loan Status After {months} Months=====")
@@ -27,8 +23,8 @@ def make_monthly_payment(loan):
     loan["principal"] -= loan["monthly payment"]
     if loan["principal"] >= 0:
         loan["money paid"] += loan["monthly payment"]
-    elif loan["principal"] < 0:
-        loan["money paid"] -= (loan["principal"] - loan["monthly payment"])
+    if loan["principal"] < 0:
+        loan["money paid"] += (loan["monthly payment"] + loan["principal"])
         loan["principal"] = 0
     loan["principal"] = round(loan["principal"], 2)
 
