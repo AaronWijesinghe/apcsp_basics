@@ -1,12 +1,16 @@
 from matplotlib import pyplot
 
-loan = {}
+
 def get_loan_info():
     # Get info from the user, making sure they don't enter negative values
+    loan = {}
+
     loan["principal"] = abs(float(input("Enter the amount of $ to loan: ")))
     loan["interest"] = abs(float(input("Enter the interest rate: ")) / 100)
     loan["monthly payment"] = abs(float(input("Enter the monthly payment: ")))
     loan["money paid"] = 0
+
+    return loan
 
 def show_loan_info(loan, months):
     # Show the loan status after [months] months
@@ -34,7 +38,7 @@ def summarize_loan(loan, month, principal):
     print(f"Initial Loan Value: ${principal}")
     print(f"How many months needed to pay the loan off: {month}")
     print(f"Total Amount Spent: ${loan["money paid"]:.2f}")
-    print(f"Amount Spent on Interest: ${loan["money paid"] - starting_principal:.2f}")
+    print(f"Amount Spent on Interest: ${loan["money paid"] - principal:.2f}")
 
 def create_graph(data, loan):
     # Create a graph of the loan data
@@ -58,7 +62,7 @@ month = 0
 
 # Handles invalid inputs
 try:
-    get_loan_info()
+    loan = get_loan_info()
 except ValueError:
     print("Invalid value(s) given.")
     raise SystemExit
