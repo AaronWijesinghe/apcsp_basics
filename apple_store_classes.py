@@ -1,7 +1,25 @@
+# The clear() function won't work in PyCharm.
+
+# Aaron Wijesinghe's rendition of the Apple Store, but in a console
+# Import modules that will add extra functionality
+import os
+import copy
+import platform
+
+# Platform-agnostic clear console function
+# I am testing this program on Windows and macOS, so this is required!
+def clear():
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+# ANSI escape codes for bold text
 bold = "\033[1m"
-underline = "\033[4m"
 end = "\033[0m"
 
+# Class detailing the specs of a computer, which will be used in subclasses later on
+# This includes the tools required to print specifications and apply device upgrades
 class Computer():
     def __init__(self, name, cpu, gpu, memory, storage, price):
         self.name = name
@@ -12,13 +30,18 @@ class Computer():
         self.price = price
 
     def print_specs(self):
-        print(f"\n{bold}Device: {self.name}{end}")
-        print(f"CPU: {self.cpu}")
-        print(f"GPU: {self.gpu}")
-        print(f"Memory: {self.memory}")
-        print(f"Storage: {self.storage}")
-        print(f"Price: {self.price}")
+        print(f"\n{bold}[ID: {itemsFound}] {self.name}{end}")
+        print(f"    - CPU: {self.cpu}")
+        print(f"    - GPU: {self.gpu}")
+        print(f"    - Memory: {self.memory}")
+        print(f"    - Storage: {self.storage}")
+        print(f"    - Price: ${self.price}")
 
+    def apply_upgrade(self, priceIncrease, category, upgrade):
+        self.price += priceIncrease
+        exec(f"self.{category} = upgrade")
+
+# All of the Apple devices available in the store will be listed below.
 class MacBook_Air(Computer):
     def __init__(self, name, cpu, gpu, memory, storage, price):
         super().__init__(name, cpu, gpu, memory, storage, price)
@@ -43,60 +66,202 @@ class MacMini(Computer):
     def __init__(self, name, cpu, gpu, memory, storage, price):
         super().__init__(name, cpu, gpu, memory, storage, price)
 
+class iPhone(Computer):
+    def __init__(self, name, cpu, gpu, memory, storage, price):
+        super().__init__(name, cpu, gpu, memory, storage, price)
+
+# This is a list of all the Apple computers available in the store.
 computers = [
     [
-        MacBook_Air("MacBook Air", "Apple M2", "Integrated 8-core GPU", "8GB", "256GB SSD", "999"),
-        MacBook_Air("MacBook Air", "Apple M3", "Integrated 8-core GPU", "8GB", "256GB SSD", "1099")
+        MacBook_Air("MacBook Air", "Apple M2", "8-core GPU", "8GB", "256GB SSD", 999),
+        MacBook_Air("MacBook Air", "Apple M3", "8-core GPU", "8GB", "256GB SSD", 1099)
     ],
     [
-        MacBook_Pro14("MacBook Pro 14-inch", "Apple M2 Pro", "Integrated 16-core GPU", "16GB", "512GB SSD", "1499"),
-        MacBook_Pro14("MacBook Pro 14-inch", "Apple M3 Pro", "Integrated 14-core GPU", "18GB", "512GB SSD", "1999"),
-        MacBook_Pro14("MacBook Pro 14-inch", "Apple M2 Max", "Integrated 16-core GPU", "32GB", "1TB SSD", "2599"),
-        MacBook_Pro14("MacBook Pro 14-inch", "Apple M3 Max", "Integrated 16-core GPU", "36GB", "1TB SSD", "3199")
+        MacBook_Pro14("MacBook Pro 14-inch", "Apple M3 Pro", "14-core GPU", "18GB", "512GB SSD", 1999),
+        MacBook_Pro14("MacBook Pro 14-inch", "Apple M3 Max", "30-core GPU", "36GB", "1TB SSD", 3199)
     ],
     [
-        MacBook_Pro16("MacBook Pro 16-inch", "Apple M2 Pro", "Integrated 16-core GPU", "16GB", "512GB SSD", "1899"),
-        MacBook_Pro16("MacBook Pro 16-inch", "Apple M3 Pro", "Integrated 14-core GPU", "18GB", "512GB SSD", "2499"),
-        MacBook_Pro16("MacBook Pro 16-inch", "Apple M2 Max", "Integrated 16-core GPU", "32GB", "1TB SSD", "2899"),
-        MacBook_Pro16("MacBook Pro 16-inch", "Apple M3 Max", "Integrated 16-core GPU", "36GB", "1TB SSD", "3499")
+        MacBook_Pro16("MacBook Pro 16-inch", "Apple M3 Pro", "14-core GPU", "18GB", "512GB SSD", 2899),
+        MacBook_Pro16("MacBook Pro 16-inch", "Apple M3 Max", "30-core GPU", "36GB", "1TB SSD", 3499)
     ],
     [
-        iMac("iMac 24-inch", "Apple M3", "Integrated 8-core GPU", "8GB", "256GB SSD", "1299")
+        iMac("iMac 24-inch", "Apple M3", "8-core GPU", "8GB", "256GB SSD", 1299),
     ],
     [
-        MacPro("Mac Pro", "Apple M2 Max", "Integrated 16-core GPU", "32GB", "1TB SSD", ""),
-        MacPro("Mac Pro", "Apple M3 Max", "Integrated 16-core GPU", "32GB", "1TB SSD", ""),
-        MacPro("Mac Pro", "Apple M2 Ultra", "Integrated 16-core GPU", "192GB", "8TB SSD", "")
+        MacPro("Mac Pro", "Apple M1 Ultra", "48-core GPU", "64GB", "1TB SSD", 5999),
+        MacPro("Mac Pro", "Apple M2 Ultra", "60-core GPU", "64GB", "1TB SSD", 6999),
     ],
     [
-        MacMini("Mac Mini", "Apple M2", "Integrated 8-core GPU", "8GB", "256GB SSD", ""),
-        MacMini("Mac Mini", "Apple M3", "Integrated 8-core GPU", "8GB", "256GB SSD", "")
+        # Got rid of 2 GPU cores to make the upgrade that you will see later on make more sense.
+        MacMini("Mac Mini", "Apple M2", "8-core GPU", "8GB", "256GB SSD", 599),
+    ],
+    [
+        # For the sake of simplicity, the iPhone 16 Pro Max will not have the 256 GB of storage it's supposed to have.
+        # I decreased the price (Apple never does this) to make up for the missing storage.
+        iPhone("iPhone 16", "Apple A18", "5-core GPU", "8GB", "128GB", 799),
+        iPhone("iPhone 16 Plus", "Apple A18", "5-core GPU", "8GB", "128GB", 899),
+        iPhone("iPhone 16 Pro", "Apple A18 Pro", "6-core GPU", "8GB", "128GB", 999),
+        iPhone("iPhone 16 Pro Max", "Apple A18 Pro", "6-core GPU", "8GB", "128GB", 1099)
     ]
 ]
 
+# These are the possible upgrades that can be applied to each Apple device.
+# Each upgrade is CPU specific, so the upgrade options are different for each device.
+possible_upgrades = {
+    "Apple M3": [
+        {"gpu": "10-core GPU", "price": 200},
+        {"memory": "16GB", "price": 200},
+        {"memory": "24GB", "price": 400},
+        {"storage": "512GB SSD", "price": 200},
+        {"storage": "1TB SSD", "price": 400},
+        {"storage": "2TB SSD", "price": 800}
+    ],
+    "Apple M3 Pro": [
+        {"gpu": "18-core GPU", "price": 200},
+        {"memory": "36GB", "price": 400},
+        {"storage": "1TB SSD", "price": 200},
+        {"storage": "2TB SSD", "price": 600},
+        {"storage": "4TB SSD", "price": 1200}
+    ],
+    "Apple M3 Max": [
+        {"gpu": "40-core GPU", "price": 300},
+        {"memory": "48GB", "price": 200},
+        {"memory": "64GB", "price": 400},
+        {"memory": "96GB", "price": 800},
+        {"memory": "128GB", "price": 1200},
+        {"storage": "2TB SSD", "price": 400},
+        {"storage": "4TB SSD", "price": 1000},
+        {"storage": "8TB SSD", "price": 2200}
+    ],
+    "Apple M1 Ultra": [
+        {"gpu": "64-core GPU", "price": 1000},
+        {"memory": "96GB", "price": 800},
+        {"memory": "128GB", "price": 1600},
+        {"storage": "2TB SSD", "price": 400},
+        {"storage": "4TB SSD", "price": 1000},
+        {"storage": "8TB SSD", "price": 2200}
+    ],
+    "Apple M2 Ultra": [
+        {"gpu": "76-core GPU", "price": 1000},
+        {"memory": "128GB", "price": 800},
+        {"memory": "192GB", "price": 1600},
+        {"storage": "2TB SSD", "price": 400},
+        {"storage": "4TB SSD", "price": 1000},
+        {"storage": "8TB SSD", "price": 2200}
+    ],
+    "Apple A18": [
+        {"storage": "256GB", "price": 100},
+        {"storage": "512GB", "price": 300}
+    ],
+    "Apple A18 Pro": [
+        {"storage": "256GB", "price": 100},
+        {"storage": "512GB", "price": 300},
+        {"storage": "1TB", "price": 500}
+    ]
+}
+possible_upgrades["Apple M2"] = possible_upgrades["Apple M3"]
+possible_upgrades["Apple M2 Pro"] = possible_upgrades["Apple M3 Pro"]
+
+status = None
 while True:
-    print("Welcome to the Apple Store!")
-    if not input("Are you looking for an Apple product (y/n)? ").lower().startswith("y"):
-        raise SystemExit
-
-    print("\nHere is our selection of Apple products:")
-    print("1) MacBook Air")
-    print("2) MacBook Pro 14-inch")
-    print("3) MacBook Pro 16-inch")
-    print("4) iMac")
-    print("5) Mac Pro")
-    print("6) Mac Mini")
-
-    try:
-        choice = int(input("\nWhich product would you like to see? ")) - 1
-    except ValueError:
-        choice = len(computers)
-
-    if abs(choice) >= len(computers):
-        print("Invalid choice.")
-        raise SystemExit
+    clear()
+    if status == "returning":
+        print("Welcome back to the Apple Store, returning customer!")
+        welcomePrompt = "Want to buy another Apple product (y/n)? "
+    elif status == "no_purchase":
+        print("Welcome back! Still thinking of buying an Apple product?")
+        welcomePrompt = "Want to go back into the store (y/n)? "
     else:
-        print("Here are the products currently available for sale:")
+        print("Welcome to the Apple Store!")
+        welcomePrompt = "Are you looking for an Apple product (y/n)? "
 
-    for product in computers[choice]:
+    if not input(welcomePrompt).lower().startswith("y"):
+        break
+
+    # Print selection of Apple products
+    print(f"\n{bold}Here is our selection of Apple products:{end}")
+    print("[1] MacBook Air")
+    print("[2] MacBook Pro 14-inch")
+    print("[3] MacBook Pro 16-inch")
+    print("[4] iMac")
+    print("[5] Mac Pro")
+    print("[6] Mac Mini")
+    print("[7] iPhone")
+
+    # Get user input on which product they want to view
+    choice = input("\nChoose a number from 1-7 to view that specific product: ").strip()
+
+    # Print the products available for sale, alongside their specs
+    itemsFound = 0
+    if choice.isnumeric():
+        choice = int(choice) - 1
+        if abs(choice) >= len(computers):
+            status = "no_purchase"
+            input("This product doesn't exist. ")
+            continue
+        else:
+            clear()
+            print("Here are the products currently available for sale:")
+
+        for product in computers[choice]:
+            itemsFound += 1
+            product.print_specs()
+    else:
+        status = "no_purchase"
+        input("This product doesn't exist. ")
+        continue
+
+    # Allow the user to view another product or buy the product they are currently viewing
+    id = input("\nPress ENTER to view another product, or type a Product ID to buy it. ")
+    if id.isnumeric() and int(id) <= itemsFound:
+        clear()
+        id = int(id) - 1
+        product = copy.deepcopy(computers[choice][id])
+
+        # Show the user device upgrades that can be applied
+        print(f"Here are some upgrades that can be applied to your {bold}{product.name}{end}:")
+        upgrades = 0
+        for upgrade in possible_upgrades[product.cpu]:
+            upgrades += 1
+            if "gpu" in upgrade:
+                print(f"    - [{upgrades}] GPU: {upgrade['gpu']}")
+            elif "memory" in upgrade:
+                print(f"    - [{upgrades}] Memory: {upgrade['memory']}")
+            elif "storage" in upgrade:
+                print(f"    - [{upgrades}] Storage: {upgrade['storage']}")
+
+        # Ask the user which upgrades they want to apply to their device, and apply them
+        print("\nSeperate each number with a comma (ex: 1, 2, 3).")
+        upgrades = input("Enter the numbers of the upgrades you want to apply, or press ENTER to skip: ").replace(" ", "").strip()
+        if upgrades.isnumeric() or "," in upgrades:
+            alreadyUpgradedComponents = []
+            upgrades = upgrades.split(",")
+            for upgrade in upgrades:
+                upgrade = int(upgrade) - 1
+                try:
+                    component = list(possible_upgrades[product.cpu][upgrade])[0]
+                    if not component in alreadyUpgradedComponents:
+                        product.apply_upgrade(possible_upgrades[product.cpu][upgrade]["price"], component, possible_upgrades[product.cpu][upgrade][component])
+                        alreadyUpgradedComponents += [component]
+                except:
+                    pass
+
+            # Print new specs and prompt the user to buy the device
+            clear()
+            print("Upgrades successfully applied! Here are your device's new specs:")
+        else:
+            clear()
+            print("Alright, no upgrades were applied. Here are your device's specs:")
+
         product.print_specs()
+        if input("\nDo you want to buy this device (y/n)? ").lower().strip().startswith("y"):
+            status = "returning"
+            input(f"You purchased the {product.name} for ${product.price}! ")
+        else:
+            status = "no_purchase"
+            input("Purchase cancelled. ")
+    elif id == "":
+        continue
+    else:
+        status = "no_purchase"
+        input("Invalid Product ID. ")
