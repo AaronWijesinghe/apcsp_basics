@@ -1,6 +1,6 @@
 # The clear() function won't work in PyCharm.
+# Use another terminal for the best experience.
 
-# Aaron Wijesinghe's rendition of the Apple Store, but in a console
 # Import modules that will add extra functionality
 import os
 import copy
