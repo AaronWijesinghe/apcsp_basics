@@ -109,7 +109,7 @@ possible_upgrades = {
     "Apple M3": [
         {"gpu": "10-core GPU", "price": 200},
         {"memory": "16GB", "price": 200},
-        {"memory": "24GB", "price": 200},
+        {"memory": "24GB", "price": 400},
         {"storage": "512GB SSD", "price": 200},
         {"storage": "1TB SSD", "price": 400},
         {"storage": "2TB SSD", "price": 800}
