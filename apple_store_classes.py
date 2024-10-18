@@ -1,3 +1,4 @@
+# Aaron Wijesinghe's rendition of the Apple Store, but in a console
 # Import modules that will add extra functionality
 import os
 import copy
@@ -89,13 +90,17 @@ computers = [
         MacPro("Mac Pro", "Apple M2 Ultra", "60-core GPU", "64GB", "1TB SSD", 6999),
     ],
     [
-        MacMini("Mac Mini", "Apple M2", "10-core GPU", "8GB", "256GB SSD", 599),
+        # Got rid of 2 GPU cores to make the upgrade that you will see later on make more sense.
+        MacMini("Mac Mini", "Apple M2", "8-core GPU", "8GB", "256GB SSD", 599),
     ],
     [
-        iPhone("iPhone 16", "Apple A18", "5-core GPU", "6GB", "128GB", 799),
-        iPhone("iPhone 16 Plus", "Apple A18", "5-core GPU", "6GB", "128GB", 899)
+        # For the sake of simplicity, the iPhone 16 Pro Max will not have the 256 GB of storage it's supposed to have.
+        # I decreased the price (Apple never does this) to make up for the missing storage.
+        iPhone("iPhone 16", "Apple A18", "5-core GPU", "8GB", "128GB", 799),
+        iPhone("iPhone 16 Plus", "Apple A18", "5-core GPU", "8GB", "128GB", 899),
+        iPhone("iPhone 16 Pro", "Apple A18 Pro", "6-core GPU", "8GB", "128GB", 999),
+        iPhone("iPhone 16 Pro Max", "Apple A18 Pro", "6-core GPU", "8GB", "128GB", 1099)
     ]
-
 ]
 
 # These are the possible upgrades that can be applied to each Apple device.
@@ -145,6 +150,11 @@ possible_upgrades = {
     "Apple A18": [
         {"storage": "256GB", "price": 100},
         {"storage": "512GB", "price": 300}
+    ],
+    "Apple A18 Pro": [
+        {"storage": "256GB", "price": 100},
+        {"storage": "512GB", "price": 300},
+        {"storage": "1TB", "price": 500}
     ]
 }
 possible_upgrades["Apple M2"] = possible_upgrades["Apple M3"]
@@ -177,7 +187,7 @@ while True:
     print("[7] iPhone")
 
     # Get user input on which product they want to view
-    choice = input("\nChoose a number from 1-6 to view that specific product: ").strip()
+    choice = input("\nChoose a number from 1-7 to view that specific product: ").strip()
 
     # Print the products available for sale, alongside their specs
     itemsFound = 0
