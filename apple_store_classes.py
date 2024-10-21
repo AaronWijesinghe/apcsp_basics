@@ -70,7 +70,7 @@ class iPhone(Computer):
     def __init__(self, name, cpu, gpu, memory, storage, price):
         super().__init__(name, cpu, gpu, memory, storage, price)
 
-# This is a list of all the Apple computers available in the store.
+# This is a list of all the BASE MODEL Apple computers available in the store.
 computers = [
     [
         MacBook_Air("MacBook Air", "Apple M2", "8-core GPU", "8GB", "256GB SSD", 999),
