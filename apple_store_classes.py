@@ -41,7 +41,7 @@ class Computer:
         self.price += priceIncrease
         exec(f"self.{category} = upgrade")
 
-# All of the Apple devices available in the store will be listed below.
+# All the Apple devices available in the store will be listed below.
 class MacBook_Air(Computer):
     def __init__(self, name, cpu, gpu, memory, storage, price):
         super().__init__(name, cpu, gpu, memory, storage, price)
