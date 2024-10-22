@@ -189,7 +189,7 @@ while True:
     print("[7] iPhone")
 
     # Get user input on which product they want to view
-    choice = input("\nChoose a number from 1-7 to view that specific product: ").strip()
+    choice = input(f"\nChoose a number from 1-{len(computers)} to view that specific product: ").strip()
 
     # Print the products available for sale, alongside their specs
     itemsFound = 0
@@ -244,8 +244,10 @@ while True:
                 try:
                     component = list(possible_upgrades[product.cpu][upgrade])[0]
                     if not component in alreadyUpgradedComponents:
+                        previous_component = eval(f"product.{component}")
                         product.apply_upgrade(possible_upgrades[product.cpu][upgrade]["price"], component, possible_upgrades[product.cpu][upgrade][component])
                         alreadyUpgradedComponents += [component]
+                        exec(f"product.{component} = '{previous_component} -> {bold}'+product.{component}+'{end}'")
                 except:
                     pass
 
