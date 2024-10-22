@@ -20,7 +20,7 @@ end = "\033[0m"
 
 # Class detailing the specs of a computer, which will be used in subclasses later on
 # This includes the tools required to print specifications and apply device upgrades
-class Computer():
+class Computer:
     def __init__(self, name, cpu, gpu, memory, storage, price):
         self.name = name
         self.cpu = cpu
@@ -98,10 +98,10 @@ computers = [
     [
         # For the sake of simplicity, the iPhone 16 Pro Max will not have the 256 GB of storage it's supposed to have.
         # I decreased the price (Apple never does this) to make up for the missing storage.
-        iPhone("iPhone 16", "Apple A18", "5-core GPU", "8GB", "128GB", 799),
-        iPhone("iPhone 16 Plus", "Apple A18", "5-core GPU", "8GB", "128GB", 899),
-        iPhone("iPhone 16 Pro", "Apple A18 Pro", "6-core GPU", "8GB", "128GB", 999),
-        iPhone("iPhone 16 Pro Max", "Apple A18 Pro", "6-core GPU", "8GB", "128GB", 1099)
+        iPhone("iPhone 16", "Apple A18", "5-core GPU", "8GB", "128GB SSD", 799),
+        iPhone("iPhone 16 Plus", "Apple A18", "5-core GPU", "8GB", "128GB SSD", 899),
+        iPhone("iPhone 16 Pro", "Apple A18 Pro", "6-core GPU", "8GB", "128GB SSD", 999),
+        iPhone("iPhone 16 Pro Max", "Apple A18 Pro", "6-core GPU", "8GB", "128GB SSD", 1099)
     ]
 ]
 
@@ -150,13 +150,13 @@ possible_upgrades = {
         {"storage": "8TB SSD", "price": 2200}
     ],
     "Apple A18": [
-        {"storage": "256GB", "price": 100},
-        {"storage": "512GB", "price": 300}
+        {"storage": "256GB SSD", "price": 100},
+        {"storage": "512GB SSD", "price": 300}
     ],
     "Apple A18 Pro": [
-        {"storage": "256GB", "price": 100},
-        {"storage": "512GB", "price": 300},
-        {"storage": "1TB", "price": 500}
+        {"storage": "256GB SSD", "price": 100},
+        {"storage": "512GB SSD", "price": 300},
+        {"storage": "1TB SSD", "price": 500}
     ]
 }
 possible_upgrades["Apple M2"] = possible_upgrades["Apple M3"]
@@ -201,7 +201,7 @@ while True:
             continue
         else:
             clear()
-            print("Here are the products currently available for sale:")
+            print(f"Here are the models of the {bold}{computers[choice][0].name}{end} currently available for sale:")
 
         for product in computers[choice]:
             itemsFound += 1
@@ -224,15 +224,18 @@ while True:
         for upgrade in possible_upgrades[product.cpu]:
             upgrades += 1
             if "gpu" in upgrade:
-                print(f"    - [{upgrades}] GPU: {upgrade['gpu']}")
+                print(f"    - [{upgrades}] {product.gpu} -> {bold}{upgrade['gpu']}{end} (${upgrade['price']})")
             elif "memory" in upgrade:
-                print(f"    - [{upgrades}] Memory: {upgrade['memory']}")
+                print(f"    - [{upgrades}] {product.memory} Memory -> {bold}{upgrade['memory']} Memory{end} (${upgrade['price']})")
             elif "storage" in upgrade:
-                print(f"    - [{upgrades}] Storage: {upgrade['storage']}")
+                print(f"    - [{upgrades}] {product.storage} -> {bold}{upgrade['storage']}{end} (${upgrade['price']})")
 
         # Ask the user which upgrades they want to apply to their device, and apply them
-        print("\nSeperate each number with a comma (ex: 1, 2, 3).")
-        upgrades = input("Enter the numbers of the upgrades you want to apply, or press ENTER to skip: ").replace(" ", "").strip()
+        print("\nThings to keep in mind when upgrading a product:")
+        print(f"    - Each upgrade should be {bold}seperated with a comma{end} (ex: 1, 2, 3).")
+        print(f"    - You may only buy {bold}one{end} of each upgrade type.")
+        print("    - You can always press ENTER without entering anything to skip this step.")
+        upgrades = input("\nEnter the upgrades you want to purchase: ").replace(" ", "").strip()
         if upgrades.isnumeric() or "," in upgrades:
             alreadyUpgradedComponents = []
             upgrades = upgrades.split(",")
@@ -260,8 +263,6 @@ while True:
         else:
             status = "no_purchase"
             input("Purchase cancelled. ")
-    elif id == "":
-        continue
     else:
         status = "no_purchase"
         input("Invalid Product ID. ")
