@@ -1,10 +1,9 @@
-
 import os
 import zlib
 
 if os.path.exists("simple_atm_data.py"):
     save = eval(open("simple_atm_data.py").read())
-    exec(zlib.decompress(save).decode())
+    money = float(zlib.decompress(save).decode())
 else:
     money = 100
 
@@ -24,8 +23,7 @@ def atm():
                 input("Invalid amount of money. ")
                 continue
             money += float(deposit)
-            save = f"money = {money}".encode()
-            save = zlib.compress(save)
+            save = zlib.compress(str(money).encode())
             open("simple_atm_data.py", "w").write(str(save))
 
             input(f"Successfully deposited money. Your balance is now ${money:.2f}. ")
@@ -42,8 +40,7 @@ def atm():
                 continue
             else:
                 money -= float(withdraw)
-                save = f"money = {money}".encode()
-                save = zlib.compress(save)
+                save = zlib.compress(str(money).encode())
                 open("simple_atm_data.py", "w").write(str(save))
 
                 input(f"Successfully withdrew money. Your balance is now ${money:.2f}. ")

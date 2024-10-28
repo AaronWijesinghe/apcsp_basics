@@ -1,6 +1,5 @@
 from matplotlib import pyplot
 
-
 def get_loan_info():
     # Get info from the user, making sure they don't enter negative values
     loan = {}

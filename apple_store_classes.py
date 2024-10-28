@@ -4,15 +4,10 @@
 # Import modules that will add extra functionality
 import os
 import copy
-import platform
 
-# Platform-agnostic clear console function
-# I am testing this program on Windows and macOS, so this is required!
+# Platform-agnostic clear console function, because I use a Mac and you use Windows
 def clear():
-    if platform.system() == "Windows":
-        os.system("cls")
-    else:
-        os.system("clear")
+    os.system("cls || clear")
 
 # ANSI escape codes for bold text
 bold = "\033[1m"
@@ -220,15 +215,15 @@ while True:
 
         # Show the user device upgrades that can be applied
         print(f"Here are some upgrades that can be applied to your {bold}{product.name}{end}:")
-        upgrades = 0
+        upgradeID = 0
         for upgrade in possible_upgrades[product.cpu]:
-            upgrades += 1
+            upgradeID += 1
             if "gpu" in upgrade:
-                print(f"    - [{upgrades}] {product.gpu} -> {bold}{upgrade['gpu']}{end} (${upgrade['price']})")
+                print(f"    - [{upgradeID}] {product.gpu} -> {bold}{upgrade['gpu']}{end} (${upgrade['price']})")
             elif "memory" in upgrade:
-                print(f"    - [{upgrades}] {product.memory} Memory -> {bold}{upgrade['memory']} Memory{end} (${upgrade['price']})")
+                print(f"    - [{upgradeID}] {product.memory} Memory -> {bold}{upgrade['memory']} Memory{end} (${upgrade['price']})")
             elif "storage" in upgrade:
-                print(f"    - [{upgrades}] {product.storage} -> {bold}{upgrade['storage']}{end} (${upgrade['price']})")
+                print(f"    - [{upgradeID}] {product.storage} -> {bold}{upgrade['storage']}{end} (${upgrade['price']})")
 
         # Ask the user which upgrades they want to apply to their device, and apply them
         print("\nThings to keep in mind when upgrading a product:")
@@ -253,7 +248,10 @@ while True:
 
             # Print new specs and prompt the user to buy the device
             clear()
-            print("Upgrades successfully applied! Here are your device's new specs:")
+            if len(alreadyUpgradedComponents) > 0:
+                print("Upgrades successfully applied! Here are your device's new specs:")
+            else:
+                print("An error occured while applying upgrades.\nYour device's specs are still the same, as seen below:")
         else:
             clear()
             print("Alright, no upgrades were applied. Here are your device's specs:")
@@ -264,7 +262,7 @@ while True:
             input(f"You purchased the {product.name} for ${product.price}! ")
         else:
             status = "no_purchase"
-            input("Purchase cancelled. ")
+            input("The purchase was cancelled. ")
     else:
         status = "no_purchase"
-        input("Invalid Product ID. ")
+        input("This product doesn't exist. ")
