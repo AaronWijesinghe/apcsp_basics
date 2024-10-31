@@ -177,7 +177,7 @@ while True:
         welcomePrompt = "Are you looking for an Apple product (y/n)? "
 
     if not input(welcomePrompt).lower().startswith("y"):
-        print("Thank you for visiting the Apple Store. Come again!")
+        print("\nThank you for visiting the Apple Store. Come again soon!")
         break
 
     # Print selection of Apple products
@@ -270,6 +270,7 @@ while True:
             print(f"You purchased the {product.name} for ${product.price}! Your receipt will be printed shortly. ")
             time.sleep(3)
 
+            # Print a receipt for the user
             clear()
             print(f"{bold}[Receipt]{end}")
             print("Merchant: APPLE_STORE")
