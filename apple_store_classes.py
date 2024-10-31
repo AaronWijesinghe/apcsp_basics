@@ -3,7 +3,10 @@
 
 # Import modules that will add extra functionality
 import os
+import time
 import copy
+import random
+from datetime import datetime
 
 # Platform-agnostic clear console function, because I use a Mac and you use Windows
 def clear():
@@ -24,8 +27,11 @@ class Computer:
         self.storage = storage
         self.price = price
 
-    def print_specs(self):
-        print(f"\n{bold}[ID: {itemsFound}] {self.name}{end}")
+    def print_specs(self, newline=True):
+        if newline == True:
+            print(f"\n{bold}[ID: {itemsFound}] {self.name}{end}")
+        else:
+            print(f"{bold}[ID: {itemsFound}] {self.name}{end}")
         print(f"    - CPU: {self.cpu}")
         print(f"    - GPU: {self.gpu}")
         print(f"    - Memory: {self.memory}")
@@ -171,6 +177,7 @@ while True:
         welcomePrompt = "Are you looking for an Apple product (y/n)? "
 
     if not input(welcomePrompt).lower().startswith("y"):
+        print("Thank you for visiting the Apple Store. Come again!")
         break
 
     # Print selection of Apple products
@@ -192,7 +199,7 @@ while True:
         choice = int(choice) - 1
         if abs(choice) >= len(computers):
             status = "no_purchase"
-            input("This product doesn't exist. ")
+            input("This product line doesn't exist. ")
             continue
         else:
             clear()
@@ -203,7 +210,7 @@ while True:
             product.print_specs()
     else:
         status = "no_purchase"
-        input("This product doesn't exist. ")
+        input("This product line doesn't exist. ")
         continue
 
     # Allow the user to view another product or buy the product they are currently viewing
@@ -259,7 +266,19 @@ while True:
         product.print_specs()
         if input("\nDo you want to buy this device (y/n)? ").lower().strip().startswith("y"):
             status = "returning"
-            input(f"You purchased the {product.name} for ${product.price}! ")
+            time_purchased = datetime.now().strftime("%m/%d/%Y at %I:%M %p")
+            print(f"You purchased the {product.name} for ${product.price}! Your receipt will be printed shortly. ")
+            time.sleep(3)
+
+            clear()
+            print(f"{bold}[Receipt]{end}")
+            print("Merchant: APPLE_STORE")
+            print(f"Date: {time_purchased}")
+            print("\nProduct purchased:")
+            product.print_specs(False)
+            print(f"\nTotal: ${product.price}")
+            print(f"Card: Visa ending in {random.randint(1000, 9999)}")
+            input("\nPress ENTER to return to the store. ")
         else:
             status = "no_purchase"
             input("The purchase was cancelled. ")
