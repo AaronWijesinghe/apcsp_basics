@@ -242,8 +242,8 @@ while True:
             alreadyUpgradedComponents = []
             upgrades = upgrades.split(",")
             for upgrade in upgrades:
-                upgrade = int(upgrade) - 1
                 try:
+                    upgrade = int(upgrade) - 1
                     component = list(possible_upgrades[product.cpu][upgrade])[0]
                     if not component in alreadyUpgradedComponents:
                         previous_component = eval(f"product.{component}")
