@@ -164,6 +164,7 @@ possible_upgrades["Apple M2"] = possible_upgrades["Apple M3"]
 possible_upgrades["Apple M2 Pro"] = possible_upgrades["Apple M3 Pro"]
 
 status = None
+card = random.randint(1000, 9999)
 while True:
     clear()
     if status == "returning":
@@ -278,7 +279,7 @@ while True:
             print("\nProduct purchased:")
             product.print_specs(False)
             print(f"\nTotal: ${product.price}")
-            print(f"Card: Visa ending in {random.randint(1000, 9999)}")
+            print(f"Card: Visa ending in {card}")
             input("\nPress ENTER to return to the store. ")
         else:
             status = "no_purchase"
