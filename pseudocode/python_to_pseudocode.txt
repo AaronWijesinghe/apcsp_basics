@@ -1,0 +1,17 @@
+PROCEDURE sum_list(numbers)
+    total <- 0
+
+    FOR each number IN numbers DO
+        total <- total + number
+    END FOR
+
+    RETURN total
+END PROCEDURE
+
+PROCEDURE check_even_odd(number):
+    IF number % 2 == 0 DO
+        RETURN "Even"
+    ELSE
+        RETURN "Odd"
+    END IF
+END PROCEDURE
