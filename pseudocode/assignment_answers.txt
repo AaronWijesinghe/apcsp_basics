@@ -1,0 +1,49 @@
+Part 1 / Program Purpose and Function:
+    (1) This code gets the maximum number of a list.
+    (2) The input is a list of numbers, and the output is the maximum number in that list.
+    (3) If the input is [3, 7, 2, 5], the output would be 7.
+
+Part 2 / Identifying and Correcting Errors:
+    def sum_of_evens(n):
+        total = 0
+        for i in range(n+1):
+            if i % 2 == 0:
+                total += i
+
+    Corrections Made:
+        - There should be two equal signs instead of one inside the IF statement.
+        - There should be a colon ":" after the 0 in the IF statement.
+        - "=+" should be changed to "+=".
+
+Part 3 / Designing a Simple Algorithm:
+    (1) Step-by-Step Algorithm
+        - Step 1: Check if the given number divided by 2 has no remainder
+        - Step 2: If the given number has a remainder, return True
+        - Step 3: If the given number has no remainder, return False
+
+    (2) Algorithm -> Code
+    def is_odd(number):
+        if number % 2 == 0:
+            return False
+        else:
+            return True
+
+    (3) The algorithm divides the given number by 2, and checks if there is any remainder.
+        If there is no remainder (number % 2 == 0), the number is even.
+        Else, there is clearly a reminder and the number is odd.
+
+Part 4 / Data Abstraction with Lists:
+    names = ["Alice", "Bob", "Alex", "Maria", "Ava", "John"]
+    for name in names:
+        if name.startswith("A"):
+            print(name)
+
+    Questions:
+    (1) With a list, you are able to iterate through all of the names using a for loop.
+        This allows for the program to filter the names that start with the letter "A" more efficiently.
+
+Part 5 / Reflect on Collaboration:
+    (1) Working with others allowed for me to understand how to develop my solution better and more efficiently.
+    (2) Some feedback given by others include:
+        - Using f-strings in my code
+        - Using match/case in favor of if/elif/else in certain cases
