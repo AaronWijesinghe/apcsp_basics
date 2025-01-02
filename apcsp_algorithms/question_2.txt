@@ -1,0 +1,13 @@
+[1] Code:
+Set list_of_integers to an empty list
+Set all_even to boolean true
+Iterate through the list list_of_integers, with the current element being represented as number:
+    If number % 2 isn't equal to 0:
+        Set all_even to boolean false
+If all_even is true:
+    Print "All even"
+Else:
+    Print "Not all even"
+
+[2] This algorithm has a linearithmic time complexity, as more code is executed as you increase the size of the list.
+    The algorithm is efficient, but will become less efficient as there is a moderate growth rate in steps as more integers are added.

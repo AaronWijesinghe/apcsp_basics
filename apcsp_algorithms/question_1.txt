@@ -1,0 +1,18 @@
+Starting Code:
+1. Set x to 5
+2. Set y to 10
+3. Repeat the following steps until x = y:
+    a. Add 1 to x
+    b. Subtract 2 from y
+4. Output the values of x and y
+
+[1] I think the values of x and y will be 7 and 6 respectively.
+
+[2] Modified Code:
+1. Set x to 5
+2. Set y to 10
+3. Repeat the following steps until x &gt; y:
+    a. Add 1 to x
+    b. Subtract 2 from y
+    c. Output the values of x and y
+4. Output the values of x and y

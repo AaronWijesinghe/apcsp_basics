@@ -1,0 +1,20 @@
+[
+    {
+        "atomic_number": 1,
+        "symbol": "H",
+        "name": "Hydrogen",
+        "atomic_mass": 1.008,
+        "category": "Nonmetal",
+        "group": 1,
+        "period": 1,
+        "block": "s",
+        "appearance": "colorless gas",
+        "element_type": "Diatomic nonmetal",
+        "atomic_radius": 53,
+        "boiling_point": 20.271,
+        "melting_point": 13.99,
+        "density": 0.08988,
+        "electronegativity": 2.20,
+        "first_ionization_energy": 1312.0
+    }
+]

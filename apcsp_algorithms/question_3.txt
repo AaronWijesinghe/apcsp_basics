@@ -1,0 +1,18 @@
+Starting Code:
+1. Set sum to 0
+2. Set counter to 0
+3. While counter < n:
+    a. Add counter to sum
+    b. Increment counter by 1
+
+[1] The variable counter starts at 0.
+    The while loop only adds every positive integer before n, and doesn't include it.
+
+[2] Fixed Code:
+1. Set sum to 0
+2. Set counter to 1
+3. While counter <= n:
+    a. Add counter to sum
+    b. Increment counter by 1
+
+[3] When n = 5, the variable sum equals 15.
